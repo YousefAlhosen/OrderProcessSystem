@@ -48,7 +48,7 @@ namespace OrderProcessSystem.Tests.Services
                 CustomerName = "",
                 CustomerEmail = "",
                 ShippingAddress = "",
-                OrderDate = DateTime.UtcNow.AddDays(1), // Future date to trigger validation
+                OrderDate = DateTime.UtcNow.AddDays(1), 
                 Items = new List<OrderItem>()
             };
 

@@ -28,8 +28,8 @@ namespace OrderProcessSystem
         {
             _logger.LogInformation($"Received queue item: {queueItem}");
 
-            // Directly call the renamed order processing logic
             var result = _shipmentOrderProcessor.ProcessOrder(queueItem);
+
 
             if (result.Status == OrderProcessingStatus.DeserializationError)
             {

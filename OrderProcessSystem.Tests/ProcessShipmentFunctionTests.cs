@@ -26,23 +26,6 @@ namespace OrderProcessSystem.Tests
             );
         }
 
-        [Fact]
-        public void Run_ProcessedOrder_ReturnsProcessedMessage()
-        {
-            var queueItem = "{\"OrderId\": 1, \"CustomerId\": 123}";
-            var orderProcessingResult = new OrderProcessingResult
-            {
-                Status = OrderProcessingStatus.Processed,
-                Message = "Processed"
-            };
-
-            _mockOrderProcessor.ProcessOrder(Arg.Any<string>()).Returns(orderProcessingResult);
-
-            var result = _processShipmentFunction.Run(queueItem);
-
-            result.Should().Be("Processed");
-            _mockLogger.Received().LogInformation("Order is ready for shipment.");
-        }
 
         [Fact]
         public void Run_DeserializationError_ReturnsDeserializationErrorMessage()
@@ -78,6 +61,24 @@ namespace OrderProcessSystem.Tests
 
             result.Should().Be("JsonError");
             _mockLogger.Received().LogError("Deserialization error: JsonError");
+        }
+
+        [Fact]
+        public void Run_ProcessedOrder_ReturnsProcessedMessage()
+        {
+            var queueItem = "{\"OrderId\": 1, \"CustomerId\": 123}";
+            var orderProcessingResult = new OrderProcessingResult
+            {
+                Status = OrderProcessingStatus.Processed,
+                Message = "Processed"
+            };
+
+            _mockOrderProcessor.ProcessOrder(Arg.Any<string>()).Returns(orderProcessingResult);
+
+            var result = _processShipmentFunction.Run(queueItem);
+
+            result.Should().Be("Processed");
+            _mockLogger.Received().LogInformation("Order is ready for shipment.");
         }
     }
 }

@@ -27,7 +27,7 @@ namespace OrderProcessSystem.Tests
             _queueService = Substitute.For<IQueueService>();
             _logger = Substitute.For<ILogger<OrderReceiptFunction>>();
 
-            // Create function instance with the substituted dependencies
+            // Create OrderReceiptFunction instance with the substituted dependencies
             _function = new OrderReceiptFunction(
                 _validationService,
                 _processorService,
